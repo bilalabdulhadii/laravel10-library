@@ -43,11 +43,13 @@
                     <!-- form start -->
                     <form role="form" action="{{route('admin.book.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
-                        @if ($errors->has('custom_error'))
+                        {{--@if ($errors->has('custom_error'))
                             <div class="alert alert-danger">
                                 {{ $errors->first('custom_error') }}
                             </div>
-                        @endif
+                        @endif--}}
+
+                        @include('errors')
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="title">Book Title</label>
@@ -176,13 +178,18 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
+                            {{--<div class="form-group">
                                 <label for="publication_year">Publication Year</label>
                                 <select class="form-control" name="publication_year">
                                     @for ($year = date('Y'); $year >= 1000; $year--)
                                         <option value="{{$year}}">{{$year}}</option>
                                     @endfor
                                 </select>
+                            </div>--}}
+
+                            <div class="form-group">
+                                <label for="publication_year">Publication Year</label>
+                                <input name="publication_year" type="number" class="form-control" placeholder="publication year">
                             </div>
 
                             <div class="form-group">
@@ -211,7 +218,7 @@
                         <!-- /.box-body -->
 
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button {{--onclick="return confirm();"--}} type="submit" class="btn btn-primary">Add</button>
                         </div>
                     </form>
                 </div>
@@ -260,5 +267,18 @@
                 }
             });
         });
+
+        /*function confirm() {
+            var checkbox = document.getElementById("default_settings");
+            if (checkbox.checked) {
+                var confirmation = confirm("Are you sure, you want reset all settings to default !?");
+                if (confirmation) {
+                    return true; // Proceed with form submission
+                } else {
+                    checkbox.checked = false; // Uncheck the checkbox
+                    return false; // Cancel form submission
+                }
+            }
+        }*/
     </script>
 @endsection

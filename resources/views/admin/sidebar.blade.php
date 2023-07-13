@@ -6,19 +6,20 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
             <!-- Sidebar user panel -->
-            <div class="user-panel">
+            {{--<div class="user-panel">
                 <div class="pull-left image">
                     @if (Auth::user()->getImage())
                         <img src="{{Storage::url(Auth::user()->getImage())}}" class="img-circle" alt="User Image" />
                     @else
-                        <img src="{{asset('assets/images/100x100/User.png')}}" class="img-circle" alt="User Image" />
+                        <img src="{{asset('assets/images/150x150/User.png')}}" class="img-circle" alt="User Image" />
                     @endif
                 </div>
                 <div class="pull-left info">
                     <p><a href="{{route('profile.show')}}">{{Auth::user()->name}}</a></p>
                     <a><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
-            </div>
+            </div>--}}
+
             {{--<!-- search form -->
             <form action="" method="get" class="sidebar-form">
                 <div class="input-group">
@@ -78,16 +79,6 @@
                     </ul>
                 </li>
 
-                {{--<li class="treeview">
-                    <a style="cursor: pointer">
-                        <i class="fa  fa-photo"></i><span>Media</span><i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href=""><i class="fa fa-circle-o"></i>Gallery</a></li>
-                        <li><a href=""><i class="fa fa-circle-o"></i>Upload Media</a></li>
-                    </ul>
-                </li>--}}
-
                 <li class="treeview {{ Request::is('admin/category*') ? 'active' : '' }}">
                     <a style="cursor: pointer">
                         <i class="fa fa-list-ul"></i> <span>Categories</span> <i class="fa fa-angle-left pull-right"></i>
@@ -119,6 +110,35 @@
                 @endif
             </ul>
         </section>
+        <div class="sidebar-bottom-box">
+            <div id="more_btn" onclick="more_menu()" class="user-info">
+                <div class="user-info-img pull-left">
+                    @if (Auth::user()->getImage())
+                        <img src="{{Storage::url(Auth::user()->getImage())}}" alt="User Image" />
+                    @else
+                        <img src="{{asset('assets/images/150x150/User.png')}}" alt="User Image" />
+                    @endif
+                </div>
+                <div class="user-info-name pull-left">
+                    <a>{{Auth::user()->name}}</a><br>
+                    <a class="status"><i style="margin-right: 3px" class="fa fa-circle text-success"></i> Online</a>
+                </div>
+                <div class="more-button">
+                    <i class="fa fa-ellipsis-v"></i>
+                </div>
+            </div>
+        </div>
+        <div id="more_menu" class="more-menu">
+            <a class="more-menu-item" href="{{route('profile.show')}}" target="_blank"><i class="fa fa-user"></i>Profile</a>
+            <a class="more-menu-item" href="{{route('dashboard')}}" target="_blank"><i class="fa fa-dashboard"></i>Dashboard</a>
+            <hr style="margin: 0">
+            <form  action="{{ route('logout') }}" method="POST" id="logout-form">
+                @csrf
+                <button class="more-menu-item" type="submit" style="border: none">
+                    <i class="fa fa-sign-out"></i>Logout
+                </button>
+            </form>
+        </div>
         <!-- /.sidebar -->
     </aside>
 </div>
@@ -134,4 +154,17 @@
             }
         });
     });
+
+    function more_menu() {
+        var menu = document.getElementById("more_menu");
+        var btn = document.getElementById("more_btn");
+        if (menu.style.display === "none") {
+            menu.style.display = "block";
+            btn.classList.add("menu-open");
+        } else {
+            menu.style.display = "none";
+            btn.classList.remove("menu-open");
+        }
+    }
+    window.addEventListener("load", more_menu);
 </script>

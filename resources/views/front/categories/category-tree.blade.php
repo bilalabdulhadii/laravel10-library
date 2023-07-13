@@ -2,7 +2,7 @@
 
 <!-- category-tree.blade.php -->
 <ul class="dropdown-menu">
-    @foreach($subCategory as $sub)
+    @foreach($subCategory->sortBy('title') as $sub)
         <li class="dropdown-submenu">
             <a class="dropdown-item {{count($sub->children) ? 'dropdown-toggle' : ''}}"
                href="{{route('index.categories', ['category' => $sub->id])}}">{{ $sub->title }}</a>

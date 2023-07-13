@@ -32,6 +32,7 @@
                     <!-- /.box-header -->
 
                     <!-- form start -->
+                    @include('errors')
                     <form role="form" action="{{route('admin.author.store')}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <!-- box-body -->
@@ -101,6 +102,9 @@
                         <!-- /.box-body -->
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Add</button>
+                            {{--<input type="hidden" value="This author has made significant contributions to the literary world. Their works encompass a wide array of genres and themes, captivating readers with compelling narratives and thought-provoking storytelling. With a distinct writing style, this author has left an indelible mark on literature, earning acclaim and a dedicated readership." id="default_desc">
+                            <a style="cursor: pointer" onclick="myFunction()" class="btn btn-success">Default Description</a>
+                        --}}
                         </div>
                     </form>
                     <!-- /.form end -->
@@ -114,4 +118,17 @@
 @endsection
 
 @section('footer')
+    <script>
+        function myFunction() {
+            // Get the text field
+            var copyText = document.getElementById("default_desc");
+
+            // Select the text field
+            copyText.select();
+            //copyText.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text inside the text field
+            navigator.clipboard.writeText(copyText.value);
+        }
+    </script>
 @endsection

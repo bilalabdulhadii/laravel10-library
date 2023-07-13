@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Author;
@@ -58,14 +58,44 @@ class BookController extends Controller
             return redirect()
                 ->back()
                 ->withInput()
-                ->withErrors(['custom_error' => 'The entered ISBN is already exists " '.$request->isbn.'"']);
+                ->with(['error' => 'The entered ISBN "'.$request->isbn.'" is already exists.']);
+        }
+
+        // Check if a book with the same title and edition already exists
+        $existingBook = Book::where('title', $request->title)
+            ->where('edition', $request->edition)
+            ->first();
+
+        // Check if a book with the same title but different edition exists
+        $otherEditionBook = Book::where('title', $request->title)
+            ->where('edition', '!=', $request->edition)
+            ->first();
+
+        // Return error message if a book with the same title and edition exists
+        if ($existingBook) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with(['error' => 'The entered book "'.$request->title.'" is already exists, with the same edition']);
+        }
+
+        // Return error message if a book with the same title but different edition exists
+        if ($otherEditionBook) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with(['warning' => 'The entered book "'.$request->title.'" is already exists, with different edition']);
         }
 
         $data = new Book();
         $data->title = $request->title;
         $data->author_id = $request->input('author_id', null);
         $data->isbn = $request->isbn;
-        $data->description = $request->description;
+        if (!$request->description) {
+            $data->description = "Explore the pages of this captivating book, where imagination knows no bounds. Written by a talented author, this literary treasure offers a compelling narrative that will transport you to new worlds and engage your senses. With its masterful storytelling and rich characters, this book promises an unforgettable reading experience. Dive into its pages and let your imagination soar.";
+        } else {
+            $data->description = $request->description;
+        }
         $data->quantity_available = $request->quantity_available;
         $data->language = $request->language;
         $data->publication_year = $request->publication_year;

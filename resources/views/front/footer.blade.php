@@ -53,10 +53,10 @@
             <div class="social-icons h-100 row justify-content-center align-items-center align-content-center">
                 <h1 class="col-md-9 justify-content-center">Social Media</h1>
                 <ul class="col-md-9 justify-content-center">
-                    <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://www.youtube.com/"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="https://www.linkedin.com/feed/"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="https://twitter.com/home"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="{{$settings->facebook}}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="{{$settings->youtube}}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="{{$settings->linkedin}}" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="{{$settings->twitter}}" target="_blank"><i class="fa-brands fa-twitter"></i></a>
                 </ul>
             </div>
         </div>

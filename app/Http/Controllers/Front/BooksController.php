@@ -101,10 +101,20 @@ class BooksController extends Controller
 
     public function create($id)
     {
-        $all_loans = Loan::where('user_id', Auth::user()->getId());
-        if ($all_loans->count() >= 3)
+        $active_loans = Loan::where('user_id', Auth::user()->getId())
+            ->where('status', 'Active')
+            ->get();
+        if ($active_loans->count() >= 3)
         {
             return redirect()->route('index.books.show', ['id' => $id])->with('maxLoan', 'loan');
+        }
+
+        $pending_loans = Loan::where('user_id', Auth::user()->getId())
+            ->where('status', 'Pending')
+            ->get();
+        if ($pending_loans->count() >= 1)
+        {
+            return redirect()->route('index.books.show', ['id' => $id])->with('pendingLoan', 'loan');
         }
         $loan = new Loan();
         $loan->user_id = Auth::user()->getId();

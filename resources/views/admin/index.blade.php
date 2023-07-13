@@ -109,37 +109,8 @@
 
                 <div class="row">
                     <div class="col-md-4">
-                        <!-- Notes LIST -->
-                        <div class="box box-primary">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Message Notes</h3>
-                                <div class="box-tools pull-right">
-                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                </div>
-                            </div><!-- /.box-header -->
-                            <div class="box-body">
-                                <ul class="products-list product-list-in-box dash-box">
-                                    @foreach($notes as $message)
-                                        <li class="item">
-                                            <div class="">
-                                                <a href="{{route('admin.message.show', ['id' => $message->id])}}" class="product-title">{{$message->subject}}</a><b> From </b>
-                                                <a href="{{route('admin.message.show', ['id' => $message->id])}}" class="product-title">{{$message->name}}</a>
-                                                <span class="product-description">{{$message->note}}</span>
-                                            </div>
-                                        </li><!-- /.item -->
-                                    @endforeach
-                                </ul>
-                            </div><!-- /.box-body -->
-                            <div class="box-footer text-center">
-                                <a href="{{route('admin.message')}}" class="uppercase">View All Messages</a>
-                            </div><!-- /.box-footer -->
-                        </div><!-- /.box -->
-                    </div><!-- /.col -->
-
-                    <div class="col-md-4">
                         <!-- Messages LIST -->
-                        <div class="box box-success">
+                        <div class="box box-default">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Recent Messages</h3>
                                 <div class="box-tools pull-right">
@@ -150,14 +121,76 @@
                             <div class="box-body">
                                 <ul class="products-list product-list-in-box dash-box">
                                     @foreach($messages->reverse() as $message)
-                                        <li class="item">
-                                            <div class="">
-                                                <a href="{{route('admin.message.show', ['id' => $message->id])}}" class="product-title">{{$message->subject}}</a><b> From </b>
-                                                <a href="{{route('admin.message.show', ['id' => $message->id])}}" class="product-title">{{$message->name}}</a>
-                                                <span class="label pull-right {{$message->status == "New" ? 'label-success' : ($message->status == "Read" ? 'label-waring' : 'label-default')}}">{{$message->status}}</span>
-                                                <span class="product-description">{{$message->message}}</span>
-                                            </div>
-                                        </li><!-- /.item -->
+                                        @if($message->status == "New")
+                                            <li class="item">
+                                                <div class="">
+                                                    <a href="{{route('admin.message.show', ['id' => $message->id])}}" class="product-title">{{$message->subject}}</a><b> From </b>
+                                                    <a href="{{route('admin.message.show', ['id' => $message->id])}}" class="product-title">{{$message->name}}</a>
+                                                    <span class="label pull-right label-success">{{$message->status}}</span>
+                                                    <span class="product-description">{{$message->message}}</span>
+                                                </div>
+                                            </li><!-- /.item -->
+                                        @endif
+                                    @endforeach
+                                    @foreach($messages->reverse() as $message)
+                                        @if($message->status == "Read")
+                                            <li class="item">
+                                                <div class="">
+                                                    <a href="{{route('admin.message.show', ['id' => $message->id])}}" class="product-title">{{$message->subject}}</a><b> From </b>
+                                                    <a href="{{route('admin.message.show', ['id' => $message->id])}}" class="product-title">{{$message->name}}</a>
+                                                    <span class="label pull-right  label-waring">{{$message->status}}</span>
+                                                    <span class="product-description">{{$message->message}}</span>
+                                                </div>
+                                            </li><!-- /.item -->
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </div><!-- /.box-body -->
+                            <div class="box-footer text-center">
+                                <a href="{{route('admin.message')}}" class="uppercase">View All Messages</a>
+                            </div><!-- /.box-footer -->
+                        </div><!-- /.box -->
+                    </div><!-- /.col -->
+
+                    <div class="col-md-4">
+                        <!-- Notes LIST -->
+                        <div class="box box-default">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Message Notes</h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                <ul class="products-list product-list-in-box dash-box">
+                                    @foreach($messages->reverse() as $message)
+                                        @if($message->note !== null)
+                                            @if($message->status == "Read")
+                                                <li class="item">
+                                                    <div class="">
+                                                        <a href="{{route('admin.message.show', ['id' => $message->id])}}" class="product-title">{{$message->subject}}</a><b> From </b>
+                                                        <a href="{{route('admin.message.show', ['id' => $message->id])}}" class="product-title">{{$message->name}}</a>
+                                                        <span class="label pull-right label-waring">{{$message->status}}</span>
+                                                        <span class="product-description">{{$message->note}}</span>
+                                                    </div>
+                                                </li><!-- /.item -->
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                    @foreach($messages->reverse() as $message)
+                                        @if($message->note !== null)
+                                            @if($message->status == "Replied")
+                                                <li class="item">
+                                                    <div class="">
+                                                        <a href="{{route('admin.message.show', ['id' => $message->id])}}" class="product-title">{{$message->subject}}</a><b> From </b>
+                                                        <a href="{{route('admin.message.show', ['id' => $message->id])}}" class="product-title">{{$message->name}}</a>
+                                                        <span class="label pull-right label-default">{{$message->status}}</span>
+                                                        <span class="product-description">{{$message->note}}</span>
+                                                    </div>
+                                                </li><!-- /.item -->
+                                            @endif
+                                        @endif
                                     @endforeach
                                 </ul>
                             </div><!-- /.box-body -->
@@ -168,12 +201,53 @@
                     </div><!-- /.col -->
 
                     <div class='col-md-4'>
-                        <!-- USERS LIST -->
-                        <div class="box box-danger">
+                        <!-- PENDING LOANS -->
+                        <div class="box box-default">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Pending Loans</h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+                                <ul class="products-list product-list-in-box dash-box">
+                                    @foreach($loans->reverse() as $loan)
+                                        @if($loan->status == "Pending")
+                                            <li class="item">
+                                                <div class="">
+                                                    <a href="{{route('admin.loan.edit', ['id' => $loan->id])}}" class="product-title">{{$loan->userId->name}}</a>
+                                                    <span class="label pull-right label-waring">{{$loan->status}}</span>
+                                                    <span class="product-description">{{$loan->bookId->title}}<b> - </b>{{$loan->bookId->isbn}}</span>
+                                                </div>
+                                            </li><!-- /.item -->
+                                        @endif
+                                    @endforeach
+                                    @foreach($loans->reverse() as $loan)
+                                        @if($loan->status == "Active")
+                                            <li class="item">
+                                                <div class="">
+                                                    <a href="{{route('admin.loan.edit', ['id' => $loan->id])}}" class="product-title">{{$loan->userId->name}}</a>
+                                                    <span class="label pull-right label-success">{{$loan->status}}</span>
+                                                    <span class="product-description">{{$loan->bookId->title}}<b> - </b>{{$loan->bookId->isbn}}</span>
+                                                </div>
+                                            </li><!-- /.item -->
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </div><!-- /.box-body -->
+                            <div class="box-footer text-center">
+                                <a href="{{route('admin.loan')}}" class="uppercase">View All Loans</a>
+                            </div><!-- /.box-footer -->
+                        </div><!-- /.box -->
+
+
+                        {{--<!-- USERS LIST -->
+                        <div class="box box-default">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Latest Members</h3>
                                 <div class="box-tools pull-right">
-                                    {{--<span class="label label-danger">8 New Members</span>--}}
+                                    <span class="label label-danger">8 New Members</span>
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                 </div>
@@ -188,7 +262,7 @@
                                                     <img src="{{asset('assets/images/150x150/User.png')}}" alt="image"/>
                                                 @endif
                                                 <a class="users-list-name" href="{{route('admin.user.show', ['id' => $user->id])}}">{{$user->name}}</a>
-                                                <span class="users-list-date">{{$user->created_at->format('Y-F-j')}} - {{$user->id}}</span>
+                                                <span class="users-list-date">{{$user->created_at->format('Y-F-j')}}</span>
                                             </li>
                                     @endforeach
                                 </ul><!-- /.users-list -->
@@ -196,10 +270,10 @@
                             <div class="box-footer text-center">
                                 <a href="{{route('admin.user')}}" class="uppercase">View All Users</a>
                             </div><!-- /.box-footer -->
-                        </div><!--/.box -->
+                        </div>
+                        <!--/.box -->--}}
                     </div><!-- /.col -->
                 </div>
-
 
                 <!-- Default box -->
                 {{--<div class="box">
@@ -220,7 +294,6 @@
                     <!-- /.box-footer-->
                 </div>--}}
                 <!-- /.box -->
-
             </section>
             <!-- /.content -->
         </div>
@@ -242,6 +315,5 @@
                 }
             });
         });
-
     </script>
 @endsection

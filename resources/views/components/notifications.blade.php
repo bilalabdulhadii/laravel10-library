@@ -34,18 +34,18 @@
         <tbody>
         @if(Auth::user()->getMessages()->count() > 0)
             @foreach(Auth::user()->getMessages() as $message)
-                    <tr>
-                        <td class="{{$message->status == "New" ? 'new-message' : ($message->status == "Read" ? 'read-message' : 'replied-message')}}">
-                            @if($message->status == "New")
-                                Received
-                            @else
-                                {{$message->status}}
-                            @endif
-                        </td>
-                        <td>{{$message->subject}}</td>
-                        <td>{{$message->message}}</td>
-                        <td>{{$message->reply}}</td>
-                    </tr>
+                <tr>
+                    <td class="{{$message->status == "New" ? 'new-message' : ($message->status == "Read" ? 'read-message' : 'replied-message')}}">
+                        @if($message->status == "New")
+                            Received
+                        @else
+                            {{$message->status}}
+                        @endif
+                    </td>
+                    <td>{{$message->subject}}</td>
+                    <td>{{$message->message}}</td>
+                    <td>{{$message->reply}}</td>
+                </tr>
             @endforeach
         @else
             <tr>

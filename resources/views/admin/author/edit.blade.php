@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="lname">Last Name</label>
-                                        <input type="text" class="form-control" name="lname" value="{{$data->lname}}" required>
+                                        <input type="text" class="form-control" name="lname" value="{{$data->lname}}">
                                     </div>
                                 </div>
                             </div>

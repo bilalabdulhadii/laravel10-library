@@ -7,11 +7,6 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Project Description Video Links
-## https://www.youtube.com/watch?v=NHC74QfJ0cg&ab_channel=BilalAbdulhadi
-
-## https://www.youtube.com/watch?v=7pULfp-gXLs&ab_channel=BilalAbdulhadi
-
 
 ## About Laravel
 

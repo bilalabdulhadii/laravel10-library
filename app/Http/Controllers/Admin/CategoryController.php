@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Setting;
@@ -21,6 +21,18 @@ class CategoryController extends Controller
         $title = $parent->title.' > '.$title;
         return CategoryController::parentTree($parent, $title);
     }
+
+    /*public static function parentTree($category, $title)
+    {
+        if ($category->parent_id == 0) return $title;
+
+        $parent = Category::find($category->parent_id);
+        $title = $parent->title . ' > ' . $title;
+
+        return CategoryController::parentTree($parent, $title)
+            ->orderBy('title') // Sort categories by title
+            ->get(); // Retrieve the sorted categories
+    }*/
 
     public function index()
     {

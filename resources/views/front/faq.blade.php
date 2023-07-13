@@ -21,7 +21,7 @@
 @endsection
 
 @section('content')
-    <div class="body_bg layout_padding">
+    <div class="body_bg layout_padding" style="min-height: 800px">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="bg-w col-md-9">

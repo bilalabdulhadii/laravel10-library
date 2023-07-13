@@ -2,7 +2,7 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <header class="main-header">
-        <a href="{{route('admin')}}" class="logo"><b>Admin</b>Panel</a>
+        <a href="{{route('index')}}" target="_blank" class="logo"><i class="fa fa-home"></i> Preview Site</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
             <!-- Sidebar toggle button-->
@@ -39,16 +39,8 @@
                     </li>
 
                     <!-- User Account: style can be found in dropdown.less -->
-                    <li style="cursor: pointer" title="Logout" class="user user-menu">
-                        <a>
-                            <form action="{{ route('logout') }}" method="POST" id="logout-form">
-                                @csrf
-                                <button type="submit" style="background: none; border: none; ">
-                                    <i class="fa fa-sign-out"> Logout</i>
-                                </button>
-                            </form>
-                        </a>
-
+                    <li style="cursor: pointer" title="Preview Site" class="user user-menu">
+                        <a href="{{route('index')}}" target="_blank"><i class="fa fa-home"></i></a>
                     </li>
                 </ul>
             </div>

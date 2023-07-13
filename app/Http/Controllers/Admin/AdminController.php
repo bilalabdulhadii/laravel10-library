@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
@@ -9,12 +9,10 @@ use App\Models\Loan;
 use App\Models\Message;
 use App\Models\Setting;
 use App\Models\User;
-use Hamcrest\Core\Set;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -24,8 +22,7 @@ class AdminController extends Controller
         $loans = Loan::all();
         $categories = Category::all();
         $users = User::all();
-        $messages = Message::all();
-        $notes = Message::whereNotNull('note')->latest()->take(5)->get();
+        $messages = Message::/*where('status', 'New')->orderBy('created_at', 'asc')->get();*/all();
         return view('admin.index', [
             'settings' => $settings,
             'books' => $books,
@@ -33,7 +30,6 @@ class AdminController extends Controller
             'users' => $users,
             'messages' => $messages,
             'categories' => $categories,
-            'notes' => $notes,
         ]);
     }
 
@@ -79,5 +75,3 @@ class AdminController extends Controller
         return view('admin.image', compact('images'));
     }
 }
-
-

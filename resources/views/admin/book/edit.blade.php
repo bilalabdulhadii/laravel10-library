@@ -178,6 +178,7 @@
                             <div class="form-group">
                                 <label for="publication_year">Publication Year</label>
                                 <select class="form-control" name="publication_year">
+                                    <option value="{{null}}">Select One ...</option>
                                     @for ($year = date('Y'); $year >= 1000; $year--)
                                         <option value="{{$year}}"
                                             {{$year == $data->publication_year ? 'selected' : ''}}>

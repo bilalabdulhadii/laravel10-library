@@ -20,6 +20,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('admin')->get('/image', [AdminController::class,'show_images'])->name('images');
 
+/*Route::get('/test', [\App\Http\Controllers\Controller::class, 'test'])->name('test');
+Route::post('/test-save', [\App\Http\Controllers\Controller::class, 'test_save'])->name('test-save');*/
+
+
+
 /******************************* ADMIN PANEL ROUTES *******************************/
 Route::middleware('admin')->get('/admin', [AdminController::class,'index'])->name('admin');
 Route::get('/admin-login', [AdminController::class,'login'])->name('admin.login');

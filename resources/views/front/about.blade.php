@@ -14,7 +14,7 @@
 @endsection
 
 @section('content')
-    <section class="body_bg layout_padding">
+    <section class="body_bg layout_padding" style="min-height: 800px">
         <div class="container">
             <div class="row">
                 <div class="bg-w col-md-6 offset-md-3">

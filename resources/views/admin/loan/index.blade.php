@@ -102,7 +102,7 @@
                                 </tr>
                             </tfoot>
                             <tbody>
-                                @foreach($data as $rs)
+                                @foreach($data->reverse() as $rs)
                                     <tr>
                                         <td>{{$rs->id}}</td>
                                         <td class="{{$rs->status == 'Active' ? 'active-loan' : ($rs->status == 'Overdue' ? 'overdue-loan' : ($rs->status == 'Returned' ? 'returned-loan' : 'pending-status'))}}">

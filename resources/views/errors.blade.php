@@ -26,7 +26,18 @@
         <button type="button" class="close" data-dismiss="alert">x</button>
         <div style="text-align: center" class="container">
             <h2>Sorry ..., You cannot Borrow more than <b>3</b> books in the same time.</h2><br>
-            <h2>You can see your books from your dashboard</h2><br>
+            <h2>You can see your active books from your dashboard</h2><br>
+            <a style="margin-bottom: 20px" href="{{route('dashboard')}}" class="btn btn-primary">Go To The Dashboard</a>
+        </div>
+    </div>
+@endif
+
+@if($message = Session::get('pendingLoan'))
+    <div style="margin-bottom: 50px" class="alert alert-warning alert-block">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <div style="text-align: center" class="container">
+            <h2>Sorry ..., You already have one request.</h2><br>
+            <h2>You can see your requests from your dashboard</h2><br>
             <a style="margin-bottom: 20px" href="{{route('dashboard')}}" class="btn btn-primary">Go To The Dashboard</a>
         </div>
     </div>

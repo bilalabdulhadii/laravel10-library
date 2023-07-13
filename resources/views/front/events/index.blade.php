@@ -40,7 +40,7 @@
 @endsection
 
 @section('content')
-    <div class="layout_padding body_bg" style="min-height: 600px">
+    <div class="layout_padding body_bg" style="min-height: 800px">
         <div class="container">
             <div class="row justify-content-center">
                 @php
@@ -52,7 +52,7 @@
                     return new HtmlString($truncated);
                     }
                 @endphp
-                @foreach($data as $event)
+                @foreach($data->reverse() as $event)
                     @if($event->status)
                         <div class="col-md-3 d-flex flex-column event-date">
                             <span class="" style="font-size: 40px">{{$event->created_at->format('j')}}</span>

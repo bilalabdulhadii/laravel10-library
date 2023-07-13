@@ -65,7 +65,7 @@
         font-weight: 900;
         display: block;
         cursor: pointer;
-        border: 1px solid rgba(0, 0, 0, .7);;
+        /*border: 1px solid rgba(0, 0, 0, .7);*/
         padding: 0 5px;
         margin: 0;
         border-radius: 10px;
@@ -73,7 +73,7 @@
 
     .chat-form .close-form:hover {
         color: rgba(0, 0, 0, 1);
-        border-color: rgba(0, 0, 0, 1);;
+        border-color: rgba(0, 0, 0, 1);
     }
 
     .chat-form input, .chat-form textarea {

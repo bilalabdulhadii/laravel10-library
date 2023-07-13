@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Author;
@@ -31,14 +31,38 @@ class AuthorController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'fname' => 'required',
+            'lname' => 'nullable',
+        ]);
+
+        $existingAuthor = Author::where('fname', $request->fname)
+            ->where(function ($query) use ($request) {
+                $query->where('lname', $request->lname)
+                    ->orWhereNull('lname');
+            })
+            ->first();
+
+        if ($existingAuthor) {
+            // Handle the case where the author already exists
+            // You can send an error message or perform any other necessary action.
+            return back()->with('error', 'The author "'.$request->fname.' '.$request->lname.'" already exists');
+        }
+
         $data = new Author();
         $data->fname = $request->fname;
         $data->lname = $request->lname;
         $data->dates = $request->birth_date.' - '.$request->death_date;
-        $data->description = $request->description;
+        if (!$request->description)
+        {
+            $data->description = "This author has made significant contributions to the literary world. Their works encompass a wide array of genres and themes, captivating readers with compelling narratives and thought-provoking storytelling. With a distinct writing style, this author has left an indelible mark on literature, earning acclaim and a dedicated readership.";
+        } else {
+            $data->description = $request->description;
+        }
         if ($request->file('image')) {
             $data->image = $request->file('image')->store('image');
         }
+
         $data->save();
         return redirect()->route('admin.author');
     }

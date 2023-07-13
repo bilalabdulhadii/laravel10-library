@@ -29,6 +29,14 @@ class SettingController extends Controller
         $id = $request->input('id');
 
         $data = Setting::find($id);
+
+        if ($request->input('default_settings')) {
+            $data->delete();
+            $settings = new Setting();
+            $settings->title = 'Project title';
+            $settings->save();
+            return redirect()->route('admin.settings');
+        }
         $data->title = $request->input('title');
         $data->keywords = $request->input('keywords');
         $data->description = $request->input('description');
@@ -43,9 +51,11 @@ class SettingController extends Controller
         $data->smtpport = $request->input('smtpport');
         $data->references = $request->input('references');
         $data->about = $request->input('about');
-        $data->contact = $request->input('contact');
+        $data->facebook = $request->input('facebook');
+        $data->youtube = $request->input('youtube');
+        $data->linkedin = $request->input('linkedin');
+        $data->twitter = $request->input('twitter');
         $data->status = $request->input('status');
-        $data->reset = $request->input('reset');
         if ($request->del_icon) {
             if ($data->icon) {
                 Storage::delete($data->icon);

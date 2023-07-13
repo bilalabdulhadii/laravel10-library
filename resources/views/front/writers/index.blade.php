@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-    <div class="layout_padding">
+    <div class="layout_padding" style="min-height: 800px">
         <div class="container">
 
             <div class="row">
